@@ -2,17 +2,17 @@ package ma.fstt.atelier6.controllers;
 
 import ma.fstt.atelier6.entities.Etudiant;
 import ma.fstt.atelier6.services.EtudiantService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/etudiants")
+@RequiredArgsConstructor
 public class EtudiantController {
 
-    @Autowired
-    private EtudiantService etudiantService;
+    private final EtudiantService etudiantService;
 
     // Afficher la liste des étudiants
     @GetMapping

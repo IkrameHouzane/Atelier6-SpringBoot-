@@ -2,16 +2,16 @@ package ma.fstt.atelier6.services;
 
 import ma.fstt.atelier6.entities.Absence;
 import ma.fstt.atelier6.repositories.AbsenceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AbsenceServiceImpl implements AbsenceService {
 
-    @Autowired
-    private AbsenceRepository absenceRepository;
+    private final AbsenceRepository absenceRepository;
 
     @Override
     public List<Absence> getAllAbsences() {
