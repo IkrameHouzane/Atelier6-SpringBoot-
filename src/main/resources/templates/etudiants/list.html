@@ -4,21 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Étudiants</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.08);
+        }
+        .card-header {
+            background-color: #78c2ad;
+            color: white;
+            border-bottom: none;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .btn-light {
+            background-color: #e9ecef;
+            border-color: #e9ecef;
+            color: #343a40;
+        }
+        .btn-light:hover {
+            background-color: #dee2e6;
+            border-color: #dee2e6;
+        }
+        .table thead th {
+            background-color: #343a40;
+            color: white;
+        }
+        .badge-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">🏠 Accueil</a>
-        <span class="navbar-text text-white">
-                Gestion des Étudiants
-            </span>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            🏫 Accueil
+        </a>
+        <span class="navbar-text ms-auto">
+            Gestion des Étudiants
+        </span>
     </div>
 </nav>
 
 <div class="container mt-4">
     <div class="card">
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <h3 class="mb-0">👦 Liste des Étudiants</h3>
             <a href="/etudiants/nouveau" class="btn btn-light">
                 ➕ Ajouter un étudiant
@@ -26,9 +66,9 @@
         </div>
         <div class="card-body">
             <!-- Formulaire de recherche -->
-            <form method="get" action="/etudiants/rechercher" class="mb-3">
+            <form method="get" action="/etudiants/rechercher" class="mb-4">
                 <div class="input-group">
-                    <input type="text" name="nom" class="form-control" placeholder="Rechercher par nom...">
+                    <input type="text" name="nom" class="form-control" placeholder="Rechercher par nom..." th:value="${param.nom}">
                     <button type="submit" class="btn btn-outline-primary">🔍 Rechercher</button>
                 </div>
             </form>
@@ -82,5 +122,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>
