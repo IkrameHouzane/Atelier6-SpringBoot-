@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Absences - École Maternelle</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body text-center p-5">
+                    <h1 class="display-4 mb-4">🎒 Gestion des Absences</h1>
+                    <p class="lead text-muted mb-5">École Maternelle</p>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <a href="/etudiants" class="btn btn-primary btn-lg w-100 py-4">
+                                <h3 class="mb-2">👦 Étudiants</h3>
+                                <p class="mb-0 small">Gérer les étudiants</p>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="/absences" class="btn btn-success btn-lg w-100 py-4">
+                                <h3 class="mb-2">📋 Absences</h3>
+                                <p class="mb-0 small">Gérer les absences</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

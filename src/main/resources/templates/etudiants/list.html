@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Étudiants</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">🏠 Accueil</a>
+        <span class="navbar-text text-white">
+                Gestion des Étudiants
+            </span>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">👦 Liste des Étudiants</h3>
+            <a href="/etudiants/nouveau" class="btn btn-light">
+                ➕ Ajouter un étudiant
+            </a>
+        </div>
+        <div class="card-body">
+            <!-- Formulaire de recherche -->
+            <form method="get" action="/etudiants/rechercher" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="nom" class="form-control" placeholder="Rechercher par nom...">
+                    <button type="submit" class="btn btn-outline-primary">🔍 Rechercher</button>
+                </div>
+            </form>
+
+            <!-- Tableau des étudiants -->
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Date de Naissance</th>
+                        <th>Classe</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="etudiant : ${etudiants}">
+                        <td th:text="${etudiant.id}"></td>
+                        <td th:text="${etudiant.nom}"></td>
+                        <td th:text="${etudiant.prenom}"></td>
+                        <td th:text="${#dates.format(etudiant.dateNaissance, 'dd/MM/yyyy')}"></td>
+                        <td>
+                            <span class="badge bg-info" th:text="${etudiant.classe}"></span>
+                        </td>
+                        <td>
+                            <a th:href="@{/etudiants/modifier/{id}(id=${etudiant.id})}"
+                               class="btn btn-sm btn-warning">
+                                ✏️ Modifier
+                            </a>
+                            <a th:href="@{/absences/etudiant/{id}(id=${etudiant.id})}"
+                               class="btn btn-sm btn-info">
+                                📋 Absences
+                            </a>
+                            <a th:href="@{/etudiants/supprimer/{id}(id=${etudiant.id})}"
+                               class="btn btn-sm btn-danger"
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet étudiant ?')">
+                                🗑️ Supprimer
+                            </a>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(etudiants)}">
+                        <td colspan="6" class="text-center text-muted">
+                            Aucun étudiant trouvé
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

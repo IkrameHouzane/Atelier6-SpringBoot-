@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Étudiant</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/etudiants">← Retour à la liste</a>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <span th:if="${etudiant.id == null}">➕ Ajouter un étudiant</span>
+                        <span th:if="${etudiant.id != null}">✏️ Modifier l'étudiant</span>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="/etudiants/sauvegarder" th:object="${etudiant}">
+                        <input type="hidden" th:field="*{id}">
+
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom *</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="nom"
+                                   th:field="*{nom}"
+                                   required
+                                   placeholder="Ex: Alami">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="prenom" class="form-label">Prénom *</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="prenom"
+                                   th:field="*{prenom}"
+                                   required
+                                   placeholder="Ex: Ahmed">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="dateNaissance" class="form-label">Date de Naissance</label>
+                            <input type="date"
+                                   class="form-control"
+                                   id="dateNaissance"
+                                   th:field="*{dateNaissance}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="classe" class="form-label">Classe</label>
+                            <select class="form-select" id="classe" th:field="*{classe}">
+                                <option value="">-- Sélectionner une classe --</option>
+                                <option value="Petite Section">Petite Section</option>
+                                <option value="Moyenne Section">Moyenne Section</option>
+                                <option value="Grande Section">Grande Section</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                💾 Enregistrer
+                            </button>
+                            <a href="/etudiants" class="btn btn-secondary">
+                                ❌ Annuler
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

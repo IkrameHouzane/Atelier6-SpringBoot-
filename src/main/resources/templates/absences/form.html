@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Absence</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-success">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/absences">← Retour à la liste</a>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">
+                        <span th:if="${absence.id == null}">➕ Ajouter une absence</span>
+                        <span th:if="${absence.id != null}">✏️ Modifier l'absence</span>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="/absences/sauvegarder" th:object="${absence}">
+                        <input type="hidden" th:field="*{id}">
+
+                        <div class="mb-3">
+                            <label for="etudiant" class="form-label">Étudiant *</label>
+                            <select class="form-select"
+                                    id="etudiant"
+                                    th:field="*{etudiant.id}"
+                                    required>
+                                <option value="">-- Sélectionner un étudiant --</option>
+                                <option th:each="etudiant : ${etudiants}"
+                                        th:value="${etudiant.id}"
+                                        th:text="${etudiant.nom + ' ' + etudiant.prenom + ' (' + etudiant.classe + ')'}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date *</label>
+                            <input type="date"
+                                   class="form-control"
+                                   id="date"
+                                   th:field="*{date}"
+                                   required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="motif" class="form-label">Motif</label>
+                            <textarea class="form-control"
+                                      id="motif"
+                                      th:field="*{motif}"
+                                      rows="3"
+                                      placeholder="Ex: Maladie, rendez-vous médical..."></textarea>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox"
+                                   class="form-check-input"
+                                   id="justifiee"
+                                   th:field="*{justifiee}">
+                            <label class="form-check-label" for="justifiee">
+                                Absence justifiée
+                            </label>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                💾 Enregistrer
+                            </button>
+                            <a href="/absences" class="btn btn-secondary">
+                                ❌ Annuler
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
